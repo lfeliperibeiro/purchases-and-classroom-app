@@ -1,8 +1,6 @@
 import {  getSession } from '@auth0/nextjs-auth0'
 import type { GetServerSideProps, NextPage } from 'next'
 
-
-
  const Home: NextPage = () => {
   return null
 }
