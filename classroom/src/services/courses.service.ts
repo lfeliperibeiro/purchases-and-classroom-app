@@ -33,7 +33,7 @@ export class CoursesService {
 
   async createCourse({
     title,
-    slug = slugify(title, { lower: true }),
+    slug = slugify(title, { lower: true, remove: /[^a-zA-Z 0-9]+/g }),
   }: CreateCourseParams) {
     const courseAlreadyExists = await this.prima.course.findUnique({
       where: {

@@ -1,8 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
-import { CoursesService } from 'src/services/courses.service';
-import { EnrollmentsService } from 'src/services/enrollments.service';
-import { StudentsService } from 'src/services/students.service';
+import { CoursesService } from '../../services/courses.service';
+import { EnrollmentsService } from '../../services/enrollments.service';
+import { StudentsService } from '../../services/students.service';
 
 export interface Customer {
   authUserId: string;
@@ -39,12 +39,12 @@ export class PurchaseController {
       });
     }
 
-    const course = await this.coursesService.getCourseBySlug(
+    let course = await this.coursesService.getCourseBySlug(
       payload.product.slug,
     );
 
     if (!course) {
-      this.coursesService.createCourse({
+      course = await this.coursesService.createCourse({
         title: payload.product.title,
       });
     }
